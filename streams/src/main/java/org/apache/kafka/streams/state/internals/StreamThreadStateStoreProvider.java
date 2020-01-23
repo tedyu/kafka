@@ -43,7 +43,7 @@ public class StreamThreadStateStoreProvider {
     public <T> List<T> stores(final String storeName,
                               final QueryableStoreType<T> queryableStoreType,
                               final boolean includeStaleStores) {
-        if (streamThread.state() == StreamThread.State.DEAD) {
+        if (streamThread.state() == StreamThread.State.DEAD || streamThread.state() == StreamThread.State.PENDING_SHUTDOWN) {
             return Collections.emptyList();
         }
         final StreamThread.State state = streamThread.state();
